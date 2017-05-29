@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import './Calendar.scss'
+
 export default class Calendar extends Component {
 
   renderDate = (date) => {
@@ -16,18 +18,35 @@ export default class Calendar extends Component {
     dateObj.setDate(1);
     const dayNum = dateObj.getDay(); //曜日の番号
     console.log(weekList[dayNum]); // 曜日
-    const aaa = weekList[dayNum];
 
     // sample 配列
-    const dayArr = [
-      [null, 1, 2, 3, 4, 5, 6],
-      [7, 8, 9, 10, 11, 12, 13],
-      [14, 15, 16, 17, 18, 19, 20],
-      [21, 22, 23, 24, 25, 26, 27],
-      [28, 29, 30, 31, null, null, null]
-    ];
+    // const dayArr = [
+    //   [null, 1, 2, 3, 4, 5, 6],
+    //   [7, 8, 9, 10, 11, 12, 13],
+    //   [14, 15, 16, 17, 18, 19, 20],
+    //   [21, 22, 23, 24, 25, 26, 27],
+    //   [28, 29, 30, 31, null, null, null]
+    // ];
+    // console.log(dayArr);
+    
+    // 配列の作成
+    let weekArr = [];
+    for (let j = 0; j < 5; j++) {
+      // console.log(j);
+      let dateArr = [];
+      for (let i = 0; i < 7; i++) {
+        const day = j * 7 + i;
+        if (day < dayNum || day > 31) {
+          dateArr.push(null);
+        } else {
+          dateArr.push(day);
+        }
+      }
+      weekArr.push(dateArr);
+    }
 
-    const week = dayArr.map((item) => {
+    // 配列をmapで回してカレンダーを生成
+    const week = weekArr.map((item) => {
       return (
         <tr>
           {this.renderDate(item)}
