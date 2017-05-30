@@ -6,7 +6,7 @@ export default class Calendar extends Component {
 
   renderDate = (date) => {
     return date.map((item, index) => {
-      return (<td>{item}</td>);
+      return (<td key={index}>{item}</td>);
     });
   }
   
@@ -31,11 +31,10 @@ export default class Calendar extends Component {
     
     // 配列の作成
     let weekArr = [];
-    for (let j = 0; j < 5; j++) {
-      // console.log(j);
+    for (let i = 0; i < 5; i++) {
       let dateArr = [];
-      for (let i = 0; i < 7; i++) {
-        const day = j * 7 + i;
+      for (let j = 0; j < 7; j++) {
+        const day = i * 7 + j;
         if (day < dayNum || day > 31) {
           dateArr.push(null);
         } else {
@@ -46,9 +45,9 @@ export default class Calendar extends Component {
     }
 
     // 配列をmapで回してカレンダーを生成
-    const week = weekArr.map((item) => {
+    const week = weekArr.map((item, index) => {
       return (
-        <tr>
+        <tr key={index}>
           {this.renderDate(item)}
         </tr>
       );
@@ -61,7 +60,9 @@ export default class Calendar extends Component {
     return (
       <div>
         <table>
-          {this.renderCalendar()}
+          <tbody>
+            {this.renderCalendar()}
+          </tbody>
         </table>
       </div>
     );
