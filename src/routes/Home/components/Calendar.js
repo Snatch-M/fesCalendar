@@ -13,11 +13,16 @@ export default class Calendar extends Component {
   renderCalendar = () => {
     const weekList = ['日', '月', '火', '水', '木', '金', '土'];
     const dateObj = new Date();
-    console.log(dateObj.getFullYear() + '年' + (dateObj.getMonth() + 1) + '月');
+    const year = dateObj.getFullYear();
+    const month = dateObj.getMonth() + 1;
+    console.log(year + '年' + month + '月');
     console.log(weekList[dateObj.getDay()]); // 曜日
+    const thisMonthNum = new Date(year, month, 0).getDate(); // 今月の日数
+    console.log(thisMonthNum);
     dateObj.setDate(1);
     const dayNum = dateObj.getDay(); //曜日の番号
-    console.log(weekList[dayNum]); // 曜日
+    // console.log(weekList[dayNum]); // 曜日
+    console.log(dayNum);
 
     // sample 配列
     // const dayArr = [
@@ -35,7 +40,7 @@ export default class Calendar extends Component {
       let dateArr = [];
       for (let j = 0; j < 7; j++) {
         const day = i * 7 + j;
-        if (day < dayNum || day > 31) {
+        if (day < dayNum || day > thisMonthNum) {
           dateArr.push(null);
         } else {
           dateArr.push(day);
